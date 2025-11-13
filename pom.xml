@@ -150,6 +150,13 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-loadbalancer</artifactId>
         </dependency>
+
+<!--        自定义拦截器-->
+        <dependency>
+            <groupId>org.xry</groupId>
+            <artifactId>Interceptors</artifactId>
+            <version>0.1.4-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>

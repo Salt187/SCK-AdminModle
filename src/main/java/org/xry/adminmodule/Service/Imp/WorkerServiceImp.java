@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.xry.adminmodule.Service.WorkerService;
 import org.xry.adminmodule.dao.WorkerMapper;
-import org.xry.adminmodule.exception.Exceptions.serviceException;
 import org.xry.adminmodule.pojo.Code;
 import org.xry.adminmodule.pojo.Worker;
+import org.xry.interceptors.exception.Exceptions.serviceException;
 
 import java.util.List;
 import java.util.Map;
@@ -29,11 +29,8 @@ public class WorkerServiceImp implements WorkerService {
     public List<Worker> selectWorker(Map<String, String> map) {
         //姓名 偏移量 查询数目限制
         String name = map.get("name");
-        Integer limit = Integer.parseInt(map.get("pageSize"));
+        int limit = Integer.parseInt(map.get("pageSize"));
         Integer offset = (Integer.parseInt(map.get("currentPage"))-1)*limit;
-
-        System.out.println("偏移量"+offset);
-        System.out.println(limit);
 
         if(name!=null)return mapper.selectWorkerByName(name);
 
