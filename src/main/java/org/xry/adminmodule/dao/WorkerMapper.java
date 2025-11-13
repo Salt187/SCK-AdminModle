@@ -10,9 +10,13 @@ import java.util.List;
 
 @Mapper
 public interface WorkerMapper {
-    //查询所有员工
+    //查询所有员工   分页查询
     @Select("select * from worker")
     List<Worker> selectAllWorker();
+
+    //分页查询
+    @Select("select * from worker limit #{offset},#{limit}")
+    List<Worker> selectWorker(Integer offset, Integer limit);
 
     //根据名字查询员工
     List<Worker> selectWorkerByName(@Param("name") String name);
@@ -21,4 +25,8 @@ public interface WorkerMapper {
     @Insert("insert into worker(name, in_date, in_age, position, state, salary, phone)" +
             " values (#{name},#{inDate},#{inAge},#{position},#{state},#{salary},#{phone})")
     Integer insertWorker(Worker worker);
+
+    //查询总员工数量
+    @Select("select count(*) from worker")
+    Integer selectWorkerNum();
 }

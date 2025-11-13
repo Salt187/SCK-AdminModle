@@ -15,18 +15,15 @@ public class WorkerController {
     @Autowired
     private WorkerService ws;
 
-    //查询员工
-    @GetMapping("/findAll")
-    public Result getWorkers() {
-        return new Result(ws.selectAllWorker(),"已查询全部数据", Code.SELECT_OK);
+    //----已弃用---------------------------------------------------
+    //一次性查询员工
+    @PostMapping("/findAll")
+    public Result getWorkers(@RequestBody Map<String, String> map) {
+        System.out.println(map.get("name"));
+        return new Result(ws.selectAllWorker(map),"已查询数据", Code.SELECT_OK);
     }
 
-    //搜索员工
-    @PostMapping("/selectByName")
-    public Result SelectWorkerByName(@RequestBody Map<String,String> nameMap) {
-        System.out.println("查询请求： "+nameMap.get("name"));
-        return new Result(ws.selectAllWorkerByName(nameMap.get("name")),"已查询指定数据",Code.SELECT_OK);
-    }
+    //---------------------------------------------------------------
 
     //添加员工
     @PostMapping("/insertWorker")
@@ -34,6 +31,18 @@ public class WorkerController {
         System.out.println(worker);
         ws.insertWorker(worker);
         return new Result(null ,"添加成功",Code.INSERT_OK);
+    }
+
+    //查询员工数量
+    @GetMapping("/selectWorkerNum")
+    public Result SelectWorkerNum() {
+        return new Result(ws.selectWorkerNum(),"预查询员工数量成功",Code.SELECT_OK);
+    }
+
+    //分页查询员工
+    @PostMapping("/selectWorker")
+    public Result SelectWorker(@RequestBody Map<String, String> map) {
+        return new Result(ws.selectWorker(map),"分页查询成功",Code.SELECT_OK);
     }
 
 }

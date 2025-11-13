@@ -11,4 +11,4 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
 
 server:
-  port: 80
+  port: 100
